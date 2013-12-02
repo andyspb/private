@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>D:\work\private\src\epee\include;D:\work\private\src\demo\iface;D:\work\private\src\demo\demo_http_server;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_WIN32_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <Optimization>Disabled</Optimization>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\demo\demo_http_server\demo_http_server.cpp" />
+    <ClCompile Include="..\src\demo\demo_http_server\stdafx.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\update_srv\stdafx.cpp" />
+    <ClCompile Include="..\src\update_srv\update_srv.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\demo\demo_http_server\demo_http_server.h" />
+    <ClInclude Include="..\src\demo\demo_http_server\stdafx.h" />
+    <ClInclude Include="..\src\demo\demo_http_server\targetver.h" />
+    <ClInclude Include="..\src\demo\iface\transport_defs.h" />
+    <ClInclude Include="..\src\demo\stdafx.h" />
+    <ClInclude Include="..\src\demo\targetver.h" />
+    <ClInclude Include="..\src\epee\include\ado_db_helper.h" />
+    <ClInclude Include="..\src\epee\include\console_handler.h" />
+    <ClInclude Include="..\src\epee\include\file_io_utils.h" />
+    <ClInclude Include="..\src\epee\include\global_stream_operators.h" />
+    <ClInclude Include="..\src\epee\include\gzip_encoding.h" />
+    <ClInclude Include="..\src\epee\include\hmac-md5.h" />
+    <ClInclude Include="..\src\epee\include\include_base_utils.h" />
+    <ClInclude Include="..\src\epee\include\logger.h" />
+    <ClInclude Include="..\src\epee\include\log_opt_defs.h" />
+    <ClInclude Include="..\src\epee\include\math_helper.h" />
+    <ClInclude Include="..\src\epee\include\md5global.h" />
+    <ClInclude Include="..\src\epee\include\md5_l.h" />
+    <ClInclude Include="..\src\epee\include\misc_language.h" />
+    <ClInclude Include="..\src\epee\include\misc_log_ex.h" />
+    <ClInclude Include="..\src\epee\include\misc_os_dependent.h" />
+    <ClInclude Include="..\src\epee\include\net\abstract_tcp_server.h" />
+    <ClInclude Include="..\src\epee\include\net\abstract_tcp_server2.h" />
+    <ClInclude Include="..\src\epee\include\net\abstract_tcp_server_cp.h" />
+    <ClInclude Include="..\src\epee\include\net\anmp_base.h" />
+    <ClInclude Include="..\src\epee\include\net\anmp_client.h" />
+    <ClInclude Include="..\src\epee\include\net\anmp_helper.h" />
+    <ClInclude Include="..\src\epee\include\net\anmp_protocol_handler.h" />
+    <ClInclude Include="..\src\epee\include\net\anmp_server_cp.h" />
+    <ClInclude Include="..\src\epee\include\net\anmp_server_cp2.h" />
+    <ClInclude Include="..\src\epee\include\net\http_base.h" />
+    <ClInclude Include="..\src\epee\include\net\http_client.h" />
+    <ClInclude Include="..\src\epee\include\net\http_client_via_api_helper.h" />
+    <ClInclude Include="..\src\epee\include\net\http_server.h" />
+    <ClInclude Include="..\src\epee\include\net\http_server_cp.h" />
+    <ClInclude Include="..\src\epee\include\net\http_server_cp2.h" />
+    <ClInclude Include="..\src\epee\include\net\http_server_handlers_map.h" />
+    <ClInclude Include="..\src\epee\include\net\http_server_thread_per_connect.h" />
+    <ClInclude Include="..\src\epee\include\net\multiprotocols_server.h" />
+    <ClInclude Include="..\src\epee\include\net\munin_connection_handler.h" />
+    <ClInclude Include="..\src\epee\include\net\munin_node_server.h" />
+    <ClInclude Include="..\src\epee\include\net\net_helper.h" />
+    <ClInclude Include="..\src\epee\include\net\net_parse_helpers.h" />
+    <ClInclude Include="..\src\epee\include\net\net_utils_base.h" />
+    <ClInclude Include="..\src\epee\include\net\protocol_switcher.h" />
+    <ClInclude Include="..\src\epee\include\net\smtp.h" />
+    <ClInclude Include="..\src\epee\include\net\smtp_helper.h" />
+    <ClInclude Include="..\src\epee\include\profile_tools.h" />
+    <ClInclude Include="..\src\epee\include\reg_exp_definer.h" />
+    <ClInclude Include="..\src\epee\include\reg_utils.h" />
+    <ClInclude Include="..\src\epee\include\serialization\mem_block.h" />
+    <ClInclude Include="..\src\epee\include\serialization\NamedSerialize.h" />
+    <ClInclude Include="..\src\epee\include\service_impl_base.h" />
+    <ClInclude Include="..\src\epee\include\sha1.h" />
+    <ClInclude Include="..\src\epee\include\soci_helper.h" />
+    <ClInclude Include="..\src\epee\include\static_initializer.h" />
+    <ClInclude Include="..\src\epee\include\stdafx.h" />
+    <ClInclude Include="..\src\epee\include\storages\abstract_invoke.h" />
+    <ClInclude Include="..\src\epee\include\storages\crypted_storage.h" />
+    <ClInclude Include="..\src\epee\include\storages\gzipped_inmemstorage.h" />
+    <ClInclude Include="..\src\epee\include\storages\inmemstorage.h" />
+    <ClInclude Include="..\src\epee\include\storages\inmemtoxml.h" />
+    <ClInclude Include="..\src\epee\include\storages\inmem_to_json.h" />
+    <ClInclude Include="..\src\epee\include\storages\InRegStorage.h" />
+    <ClInclude Include="..\src\epee\include\storages\parserse_base_utils.h" />
+    <ClInclude Include="..\src\epee\include\storages\serializeble_struct_helper.h" />
+    <ClInclude Include="..\src\epee\include\string_coding.h" />
+    <ClInclude Include="..\src\epee\include\string_tools.h" />
+    <ClInclude Include="..\src\epee\include\string_utils.h" />
+    <ClInclude Include="..\src\epee\include\syncobj.h" />
+    <ClInclude Include="..\src\epee\include\targetver.h" />
+    <ClInclude Include="..\src\epee\include\time_helper.h" />
+    <ClInclude Include="..\src\epee\include\tiny_ini.h" />
+    <ClInclude Include="..\src\epee\include\to_nonconst_iterator.h" />
+    <ClInclude Include="..\src\epee\include\utils.h" />
+    <ClInclude Include="..\src\epee\include\winobj.h" />
+    <ClInclude Include="..\src\epee\include\zlib_helper.h" />
+    <ClInclude Include="..\src\update_srv\handlers_config.h" />
+    <ClInclude Include="..\src\update_srv\incremental_update_defs.h" />
+    <ClInclude Include="..\src\update_srv\protocol_defs.h" />
+    <ClInclude Include="..\src\update_srv\protocol_events_handler.h" />
+    <ClInclude Include="..\src\update_srv\stdafx.h" />
+    <ClInclude Include="..\src\update_srv\targetver.h" />
+    <ClInclude Include="..\src\update_srv\update_req_handler.h" />
+    <ClInclude Include="..\src\update_srv\update_srv.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\epee\include\md5_l.inl" />
+    <None Include="..\src\epee\include\net\abstract_tcp_server2.inl" />
+    <None Include="..\src\epee\include\net\abstract_tcp_server_cp.inl" />
+    <None Include="..\src\epee\include\net\anmp_client.inl" />
+    <None Include="..\src\epee\include\net\http_server.inl" />
+    <None Include="..\src\epee\include\net\smtp.inl" />
+    <None Include="..\src\epee\include\sha1.inl" />
+    <None Include="..\src\update_srv\update_req_handler.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
