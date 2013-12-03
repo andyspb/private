@@ -28,6 +28,7 @@
 
 
 #include "net_utils_base.h"
+#include "boost/interprocess/detail/atomic.hpp"
 
 namespace epee
 {
@@ -51,19 +52,19 @@ namespace net_utils
 	template<class t_protocol_handler>
 	connection<t_protocol_handler>::~connection()
 	{
-		if(!boost::interprocess::ipcdetail::atomic_read32(&m_was_shutdown))
+		if(!boost::interprocess::detail::atomic_read32(&m_was_shutdown))
 		{
 			LOG_PRINT_L3("Socket destroed without shutdown." << this);
 			boost::system::error_code ignored_ec;
 			socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
-			boost::interprocess::ipcdetail::atomic_write32(&m_was_shutdown, 1);
+			boost::interprocess::detail::atomic_write32(&m_was_shutdown, 1);
 		}
 #ifdef WINDOWS_PLATFORM
 		LOG_PRINT_L2("[sock] (" << this << ") Socket destroed");
 #else
 		LOG_PRINT_L3("[sock] (" << this << ") Socket destroed");
 #endif
-		boost::interprocess::ipcdetail::atomic_dec32(&m_ref_sockets_count);
+		boost::interprocess::detail::atomic_dec32(&m_ref_sockets_count);
 	}
 	//---------------------------------------------------------------------------------
 	template<class t_protocol_handler>
@@ -78,7 +79,7 @@ namespace net_utils
 		TRY_ENTRY();
 
 
-		boost::interprocess::ipcdetail::atomic_inc32(&m_ref_sockets_count);
+		boost::interprocess::detail::atomic_inc32(&m_ref_sockets_count);
 
 
 		context.m_remote_ip = boost::asio::detail::socket_ops::host_to_network_long(socket_.remote_endpoint().address().to_v4().to_ulong());
@@ -125,13 +126,13 @@ namespace net_utils
 
 				//some error in protocol, protocol handler asc to close connection
 				CRITICAL_REGION_BEGIN(m_send_que_lock);
-				boost::interprocess::ipcdetail::atomic_write32(&m_want_close_connection, 1);
-				if(!boost::interprocess::ipcdetail::atomic_read32(&m_assync_send_count))
+				boost::interprocess::detail::atomic_write32(&m_want_close_connection, 1);
+				if(!boost::interprocess::detail::atomic_read32(&m_assync_send_count))
 				{
 					// Initiate graceful connection closure.
 					boost::system::error_code ignored_ec;
 					socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
-					boost::interprocess::ipcdetail::atomic_write32(&m_was_shutdown, 1);
+					boost::interprocess::detail::atomic_write32(&m_was_shutdown, 1);
 				}
 				CRITICAL_REGION_END();
 				// Initiate graceful connection closure.
@@ -178,7 +179,7 @@ namespace net_utils
 		m_send_que.resize(m_send_que.size()+1);
 		m_send_que.back().assign((const char*)ptr, cb);
 		
-		if(boost::interprocess::ipcdetail::atomic_cas32(&m_assync_send_count, 1, 0))
+		if(boost::interprocess::detail::atomic_cas32(&m_assync_send_count, 1, 0))
 		{
 			//active operation in progress, nothing to do, just que request
 		}else
@@ -221,13 +222,13 @@ namespace net_utils
 	{
 		LOG_PRINT_L4("Que Shutdown called.");
 		CRITICAL_REGION_BEGIN(m_send_que_lock);
-		boost::interprocess::ipcdetail::atomic_write32(&m_want_close_connection, 1);
-		if(!boost::interprocess::ipcdetail::atomic_read32(&m_assync_send_count))
+		boost::interprocess::detail::atomic_write32(&m_want_close_connection, 1);
+		if(!boost::interprocess::detail::atomic_read32(&m_assync_send_count))
 		{
 			// Initiate graceful connection closure.
 			boost::system::error_code ignored_ec;
 			socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
-			boost::interprocess::ipcdetail::atomic_write32(&m_was_shutdown, 1);
+			boost::interprocess::detail::atomic_write32(&m_was_shutdown, 1);
 		}
 		CRITICAL_REGION_END();
 		return true;
@@ -249,7 +250,7 @@ namespace net_utils
 		if(!m_send_que.size())
 		{
 			//have more data to send
-			boost::interprocess::ipcdetail::atomic_dec32(&m_assync_send_count);
+			boost::interprocess::detail::atomic_dec32(&m_assync_send_count);
 		}else
 		{
 
@@ -265,22 +266,22 @@ namespace net_utils
 		if (!e)
 		{
 			LOG_PRINT("connection<t_protocol_handler>::handle_write,[" << this << "]", LOG_LEVEL_3);
-			 boost::interprocess::ipcdetail::atomic_write32(&m_last_send_op_success, 1);
+			 boost::interprocess::detail::atomic_write32(&m_last_send_op_success, 1);
 		}
 		else
 		{
 			LOG_PRINT_L0("Some problems at write: " << e.message());
-			boost::interprocess::ipcdetail::atomic_write32(&m_last_send_op_success, 0);
+			boost::interprocess::detail::atomic_write32(&m_last_send_op_success, 0);
 		}
 
 
 
-		if(boost::interprocess::ipcdetail::atomic_read32(&m_want_close_connection) && !boost::interprocess::ipcdetail::atomic_read32(&m_assync_send_count))
+		if(boost::interprocess::detail::atomic_read32(&m_want_close_connection) && !boost::interprocess::detail::atomic_read32(&m_assync_send_count))
 		{
 			// Initiate graceful connection closure.
 			boost::system::error_code ignored_ec;
 			socket_.shutdown(boost::asio::ip::tcp::socket::shutdown_both, ignored_ec);
-			boost::interprocess::ipcdetail::atomic_write32(&m_was_shutdown, 1);
+			boost::interprocess::detail::atomic_write32(&m_was_shutdown, 1);
 		}
 		// No new asynchronous operations are started. This means that all shared_ptr
 		// references to the connection object will disappear and the object will be

@@ -338,7 +338,7 @@ unsigned omaha_protol_server::service_handler(unsigned control,
 
 //-----------------------------------------------------------------------------
 bool omaha_protol_server::idle_worker() {
-  boost::interprocess::ipcdetail::atomic_inc32(&m_threads_count);
+  boost::interprocess::detail::atomic_inc32(&m_threads_count);
   log_space::log_singletone::set_thread_log_prefix("[IDLE]: ");
 
   while (!m_is_stop) {
@@ -346,7 +346,7 @@ bool omaha_protol_server::idle_worker() {
     misc_utils::sleep_no_w(1000);
   }
 
-  boost::interprocess::ipcdetail::atomic_dec32(&m_threads_count);
+  boost::interprocess::detail::atomic_dec32(&m_threads_count);
   return true;
 }
 
@@ -388,7 +388,7 @@ bool omaha_protol_server::run() {
 
   size_t wait_count = 0;
   size_t wait_max = 80;
-  while (boost::interprocess::ipcdetail::atomic_read32(&m_threads_count)
+  while (boost::interprocess::detail::atomic_read32(&m_threads_count)
       && wait_count < wait_max) {
     misc_utils::sleep_no_w(1000);
     LOG_PRINT(

@@ -159,7 +159,7 @@ class ibase_log_value {
 
 class log_message : public std::stringstream {
  public:
-  log_message(const log_message& lm) {
+  log_message(const log_message& /*lm*/) {
   }
   log_message() {
   }

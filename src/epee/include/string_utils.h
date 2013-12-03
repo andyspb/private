@@ -10,7 +10,7 @@
 namespace epee {
 namespace stringer {
 
-int string_utils_test() {
+int test() {
   return 1;
 }
 

@@ -45,7 +45,7 @@ namespace epee
 	static const boost::regex	var_name(xpr_text , reg_exp_flags);\
 	if(!local_is_initialized_1)\
 {\
-	boost::interprocess::ipcdetail::atomic_write32(&regexp_initialized_1, 1);\
+	boost::interprocess::detail::atomic_write32(&regexp_initialized_1, 1);\
 	gregexp_lock.unlock();\
 }
 
