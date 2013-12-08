@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application app_name="Oz Update" app_id="{DD7E00B2-6188-43A6-9775-4632AD97FAD1}" needs_admin="true" language="en">
+  <os platform="win" arch="x64">
+    <app_last_version local_path="OzUpdate\">
+      <urls>
+        <url codebase="http://www.ushqhpb0202.palm.com/download/"/>
+        <url codebase="http://www.ushqhpb0202.palm.com/download/1/"/>
+        <url codebase="http://www.ushqhpb0202.palm.com/download/2/"/>
+      </urls>
+      <manifest version="1.3.25.0">
+        <packages>
+          <package hash="" name="OzUpdate.exe" required="true" size=""/>
+        </packages>
+        <actions>
+          <action arguments="/c" event="install" run="OzUpdate.exe"/>
+        </actions>
+      </manifest>
+    </app_last_version>
+  </os>
+</application>
+<application app_name="Oz" app_id="{A0D93B53-CD76-47B7-B337-8E058182CE74}" needs_admin="true" language="en">
+  <os platform="win" arch="x64">
+    <app_last_version local_path="current\1.3.25.50\">
+      <urls>
+        <url codebase="http://www.ushqhpb0202.palm.com/download/"/>
+        <url codebase="http://www.ushqhpb0202.palm.com/download/1/"/>
+        <url codebase="http://www.ushqhpb0202.palm.com/download/2/"/>
+      </urls>
+      <manifest version="1.3.25.50">
+        <packages>
+          <package hash="" name="OzSetup.exe" required="true" size=""/>
+        </packages>
+        <actions>
+          <action arguments="/verysilent" event="install" run="OzSetup.exe" successurl="www.ushqhpb0202.palm.com"  terminateallbrowsers="true" successsaction="exitsilently" />
+        </actions>
+      </manifest>
+    </app_last_version>
+  </os>
+</application>
+<global_settings>
+  <http home="current\" />
+  <connection listen_port="80" bind_ip="0.0.0.0" />
+</global_settings>
